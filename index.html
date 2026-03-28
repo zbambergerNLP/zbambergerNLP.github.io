@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zachary Bamberger</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:       #1a1814;
+      --muted:     #5a5550;
+      --faint:     #9a958f;
+      --rule:      #dedad4;
+      --cream:     #faf8f4;
+      --paper:     #ffffff;
+      --accent:    #6b4c2a;
+      --accent-lt: #f3ece2;
+      --tag-bg:    #ede8e0;
+      --max:       860px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--ink);
+      background: var(--cream);
+    }
+
+    /* ── NAV ───────────────────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250,248,244,.94);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--rule);
+      padding: 0 2rem;
+    }
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 52px;
+    }
+    .nav-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: .01em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: .82rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ──────────────────────────────────────────────────── */
+    .hero {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 5rem 2rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 3.5rem;
+      align-items: start;
+    }
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      font-weight: 600;
+      line-height: 1.12;
+      letter-spacing: -.01em;
+      color: var(--ink);
+    }
+    .hero-role {
+      margin-top: .75rem;
+      font-size: 1rem;
+      color: var(--muted);
+      font-weight: 300;
+    }
+    .hero-role strong { color: var(--accent); font-weight: 400; }
+    .hero-links {
+      margin-top: 1.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .45rem 1rem;
+      border-radius: 3px;
+      font-size: .82rem;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all .2s;
+      font-family: 'Source Serif 4', serif;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border: 1px solid var(--accent);
+    }
+    .btn-primary:hover { background: #5a3e23; border-color: #5a3e23; }
+    .btn-ghost {
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+    }
+    .btn-ghost:hover { background: var(--accent-lt); }
+    .avatar-wrap {
+      width: 148px;
+      flex-shrink: 0;
+    }
+    .avatar-photo {
+      width: 148px;
+      height: 148px;
+      border-radius: 50%;
+      border: 3px solid var(--rule);
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(26,24,20,.12);
+    }
+    .avatar-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      display: block;
+    }
+
+    /* ── MAIN LAYOUT ───────────────────────────────────────────── */
+    .page { max-width: var(--max); margin: 0 auto; padding: 0 2rem 6rem; }
+
+    hr.divider {
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin: 3.5rem 0;
+    }
+
+    /* ── SECTION HEADINGS ──────────────────────────────────────── */
+    .section-label {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.55rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 1.4rem;
+    }
+    .section-label::after {
+      content: '';
+      display: block;
+      width: 36px;
+      height: 2px;
+      background: var(--accent);
+      margin-top: .35rem;
+    }
+
+    /* ── ABOUT ─────────────────────────────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .about-text p + p { margin-top: .9rem; }
+    .info-block dt {
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--faint);
+      margin-bottom: .1rem;
+      margin-top: .9rem;
+    }
+    .info-block dt:first-child { margin-top: 0; }
+    .info-block dd {
+      font-size: .92rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .info-block dd a { color: var(--accent); text-decoration: none; }
+    .info-block dd a:hover { text-decoration: underline; }
+
+    /* ── RESEARCH INTERESTS ────────────────────────────────────── */
+    .interest-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      list-style: none;
+      margin-top: .2rem;
+    }
+    .interest-list li {
+      background: var(--tag-bg);
+      padding: .3rem .85rem;
+      border-radius: 2px;
+      font-size: .84rem;
+      color: var(--muted);
+      letter-spacing: .02em;
+    }
+
+    /* ── PAPERS ────────────────────────────────────────────────── */
+    .paper-list { display: flex; flex-direction: column; gap: 1.8rem; }
+    .paper {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.2rem;
+      align-items: start;
+    }
+    .paper-year {
+      font-size: .78rem;
+      color: var(--faint);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding-top: .25rem;
+      min-width: 40px;
+    }
+    .paper-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.4;
+      margin-bottom: .25rem;
+    }
+    .paper-title a { color: inherit; text-decoration: none; }
+    .paper-title a:hover { color: var(--accent); }
+    .paper-authors {
+      font-size: .85rem;
+      color: var(--muted);
+      font-style: italic;
+      margin-bottom: .3rem;
+    }
+    .paper-venue {
+      font-size: .82rem;
+      color: var(--faint);
+      margin-bottom: .45rem;
+    }
+    .paper-links { display: flex; flex-wrap: wrap; gap: .45rem; }
+    .paper-link {
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      padding: .2rem .6rem;
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: all .15s;
+    }
+    .paper-link:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-lt); }
+
+    /* ── NEWS ──────────────────────────────────────────────────── */
+    .news-list { list-style: none; display: flex; flex-direction: column; gap: .8rem; }
+    .news-list li {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 1rem;
+      align-items: baseline;
+      font-size: .9rem;
+      color: var(--ink);
+      padding-bottom: .8rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .news-list li:last-child { border-bottom: none; }
+    .repo-list { display: flex; flex-direction: column; gap: 1.25rem; }
+    .repo-item { padding-bottom: 1.25rem; border-bottom: 1px solid var(--rule); }
+    .repo-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .repo-name { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 1rem; margin-bottom: .35rem; }
+    .repo-name a { color: var(--ink); text-decoration: none; }
+    .repo-name a:hover { color: var(--accent); }
+    .repo-desc { font-size: .92rem; color: var(--muted); margin-bottom: .5rem; line-height: 1.55; }
+    .repo-url { font-size: .82rem; }
+    .repo-url a { color: var(--accent); text-decoration: none; word-break: break-all; }
+    .repo-url a:hover { text-decoration: underline; }
+    .news-date {
+      font-size: .78rem;
+      color: var(--faint);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    /* ── CONTACT ───────────────────────────────────────────────── */
+    .contact-block { display: flex; flex-direction: column; gap: .5rem; font-size: .92rem; color: var(--muted); }
+    .contact-block a { color: var(--accent); text-decoration: none; }
+    .contact-block a:hover { text-decoration: underline; }
+
+    /* ── FOOTER ────────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--rule);
+      text-align: center;
+      padding: 1.8rem 2rem;
+      font-size: .78rem;
+      color: var(--faint);
+    }
+
+    /* ── RESPONSIVE ────────────────────────────────────────────── */
+    @media (max-width: 640px) {
+      .hero { grid-template-columns: 1fr; }
+      .avatar-wrap { order: -1; }
+      .about-grid { grid-template-columns: 1fr; }
+      .paper { grid-template-columns: 1fr; }
+      .paper-year { padding-top: 0; }
+      .news-list li { grid-template-columns: 1fr; gap: .15rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-name" href="#">Zachary Bamberger</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#papers">Papers</a></li>
+      <li><a href="#repositories">Repositories</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div>
+    <h1 class="hero-name">Zachary<br>Bamberger</h1>
+    <p class="hero-role">
+      PhD Candidate &nbsp;·&nbsp; <strong>Technion – Israel Institute of Technology</strong><br>
+      Faculty of Data and Decision Sciences
+    </p>
+    <div class="hero-links">
+      <a class="btn btn-primary" href="mailto:zachary@campus.technion.ac.il">Email</a>
+      <a class="btn btn-ghost" href="https://github.com/zbambergerNLP" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/zeb3/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+  <div class="avatar-wrap">
+    <div class="avatar-photo">
+      <img src="seattle_hiking.jpg" alt="Zachary Bamberger" width="148" height="148" />
+    </div>
+  </div>
+</header>
+
+<main class="page">
+
+  <!-- ABOUT -->
+  <section id="about">
+    <h2 class="section-label">About</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I am a PhD student at the Technion – Israel Institute of Technology,
+          advised by <a href="https://scholar.harvard.edu/oamir/home" target="_blank" rel="noopener" style="color:var(--accent)">Ofra Amir</a>
+          and <a href="https://www.amirfeder.com/" target="_blank" rel="noopener" style="color:var(--accent)">Amir Feder</a>.
+          My research sits at the intersection of natural language processing,
+          computational argumentation, and causal inference.
+        </p>
+        <p>
+          Before my PhD I was a software engineer at Google, where I built
+          reinforcement-learning agents for recommendation systems and pre-trained on-device
+          language models with federated learning. Earlier, I studied discourse structure and
+          argumentation in
+          <a href="https://www.cs.cornell.edu/home/cardie/" target="_blank" rel="noopener" style="color:var(--accent)">Claire Cardie</a>&rsquo;s lab at Cornell University.
+          My MSc at the Technion, advised by
+          <a href="https://www.cs.technion.ac.il/~belinkov/" target="_blank" rel="noopener" style="color:var(--accent)">Yonatan Belinkov</a>,
+          produced <strong>DEPTH</strong>—a discourse-oriented pre-training objective for
+          encoder-decoder language models.
+        </p>
+        <p>
+          I have served as a teaching assistant for natural language processing and introduction to computer science (Python) at the Technion,
+          and for operating systems and NLP at Cornell.
+        </p>
+        <p>
+          In Summer 2026 I will be a visiting student researcher at Princeton University through the
+          <a href="https://gradschool.princeton.edu/admission-onboarding/nondegree-programs/research-collaborators/visiting-student-research" target="_blank" rel="noopener" style="color:var(--accent)">Visiting Student Research Collaborations (VSRC)</a>
+          program, hosted by
+          <a href="https://bstewart.scholar.princeton.edu/" target="_blank" rel="noopener" style="color:var(--accent)">Brandon Stewart</a>.
+        </p>
+      </div>
+      <dl class="info-block">
+        <dt>Advisors</dt>
+        <dd>Ofra Amir &amp; Amir Feder</dd>
+        <dt>Education</dt>
+        <dd>
+          PhD, Data &amp; Decision Sciences, Technion (2024–)<br>
+          MSc CS, Technion (2021–2024)<br>
+          BSc CS, Cornell (2015–2019)
+        </dd>
+        <dt>Institution</dt>
+        <dd>Technion – Israel Institute of Technology</dd>
+        <dt>Previously</dt>
+        <dd>Google · Amazon · Intel · Mellanox · Cornell</dd>
+        <dt>Email</dt>
+        <dd><a href="mailto:zachary@campus.technion.ac.il">zachary@campus.technion.ac.il</a></dd>
+      </dl>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- PAPERS -->
+  <section id="papers">
+    <h2 class="section-label">Papers</h2>
+    <div class="paper-list">
+
+      <div class="paper">
+        <span class="paper-year">2026</span>
+        <div>
+          <p class="paper-title">
+            <a href="https://arxiv.org/abs/2602.14265" target="_blank" rel="noopener">
+              STATe-of-Thoughts: Structured Action Templates for Tree-of-Thoughts
+            </a>
+          </p>
+          <p class="paper-authors">Zachary Bamberger, Till R. Saenger, Gilad Morad, Ofra Amir, Brandon M. Stewart, Amir Feder</p>
+          <p class="paper-venue">Preprint</p>
+          <div class="paper-links">
+            <a class="paper-link" href="https://arxiv.org/abs/2602.14265" target="_blank" rel="noopener">arXiv</a>
+            <a class="paper-link" href="https://github.com/zbambergerNLP/state-of-thoughts" target="_blank" rel="noopener">GitHub</a>
+          </div>
+          <div style="margin-top:1.1rem; display:flex; flex-direction:column; gap:.55rem;">
+            <p style="font-size:.9rem; color:var(--muted); max-width:600px; line-height:1.7;">
+              <strong style="color:var(--ink)">Problem.</strong>
+              Inference-time methods like Tree-of-Thoughts diversify reasoning trajectories through
+              temperature sampling, but temperature cannot control <em>how</em> branches differ, nor
+              produce traces that explain which reasoning choices drove output quality.
+            </p>
+            <p style="font-size:.9rem; color:var(--muted); max-width:600px; line-height:1.7;">
+              <strong style="color:var(--ink)">Method.</strong>
+              STATe replaces sampling with discrete, interpretable <em>textual interventions</em>.
+              A controller selects actions from a structured action space (e.g., which discourse
+              relation or subtopic to develop next), converts each into a text prefix that steers
+              the generator's continuation, and an evaluator scores candidates to guide beam search.
+              Each surviving branch carries a logged sequence of actions.
+            </p>
+            <p style="font-size:.9rem; color:var(--muted); max-width:600px; line-height:1.7;">
+              <strong style="color:var(--ink)">Result.</strong>
+              STATe substantially improves both the diversity and quality of generated outputs
+              over temperature-based baselines. In argument generation, sequential models over
+              logged action sequences prove highly predictive of output quality, showing that
+              the ordering and composition of rhetorical choices carries meaningful signal.
+            </p>
+          </div>
+          <figure style="margin-top:1.2rem;">
+            <img src="figure1_state.png"
+                 alt="STATe-of-Thoughts overview: define action templates, generate outputs, evaluate and study associations"
+                 style="width:100%; max-width:680px; display:block; border-radius:4px; border:1px solid var(--rule); image-rendering:-webkit-optimize-contrast;" />
+            <figcaption style="font-size:.78rem; color:var(--faint); margin-top:.4rem; max-width:600px; line-height:1.5;">
+              STATe's three-stage loop: (1) define structured action templates from output features of interest,
+              (2) generate outputs by having a controller select templates at each reasoning step,
+              (3) evaluate outputs and study associations between action choices and quality to steer future generation.
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="paper">
+        <span class="paper-year">2025</span>
+        <div>
+          <p class="paper-title">
+            <a href="https://aclanthology.org/2025.repl4nlp-1.1/" target="_blank" rel="noopener">
+              DEPTH: Discourse Education through Pre-Training Hierarchically
+            </a>
+          </p>
+          <p class="paper-authors">Zachary Bamberger, Ofek Glick, Chaim Baskin, Yonatan Belinkov</p>
+          <p class="paper-venue">Proc. 10th Workshop on Representation Learning for NLP (RepL4NLP) at NAACL 2025 · pp.&nbsp;1–15 · Albuquerque, NM</p>
+          <div class="paper-links">
+            <a class="paper-link" href="https://aclanthology.org/2025.repl4nlp-1.1/" target="_blank" rel="noopener">ACL Anthology</a>
+            <a class="paper-link" href="https://github.com/zbambergerNLP/depth" target="_blank" rel="noopener">GitHub</a>
+          </div>
+          <div style="margin-top:1.1rem; display:flex; flex-direction:column; gap:.55rem;">
+            <p style="font-size:.9rem; color:var(--muted); max-width:600px; line-height:1.7;">
+              <strong style="color:var(--ink)">Problem.</strong>
+              T5 and its variants are pre-trained with span masking, which teaches token-level and
+              semantic recovery but does not encourage the model to learn how sentences relate to
+              one another structurally. Discourse understanding therefore depends entirely on
+              task-specific supervision.
+            </p>
+            <p style="font-size:.9rem; color:var(--muted); max-width:600px; line-height:1.7;">
+              <strong style="color:var(--ink)">Method.</strong>
+              DEPTH augments T5's span-masking objective with a discourse-oriented pre-training signal.
+              The model is additionally trained to reconstruct the correct ordering of shuffled
+              sentences—learning to reason about how ideas connect across a document, directly from
+              unlabeled text and without changing the architecture or fine-tuning procedure.
+            </p>
+            <p style="font-size:.9rem; color:var(--muted); max-width:600px; line-height:1.7;">
+              <strong style="color:var(--ink)">Result.</strong>
+              Pre-training with DEPTH improves data efficiency and downstream performance on tasks
+              requiring discourse understanding. These gains also transfer favorably to other
+              linguistic capabilities, suggesting that discourse-aware pre-training instills broadly
+              useful representations rather than narrow task-specific ones.
+            </p>
+          </div>
+          <figure style="margin-top:1.2rem;">
+            <img src="depth_pipeline.png"
+                 alt="DEPTH pre-training pipeline: a document is tokenized and corrupted by shuffling sentences; the encoder processes the shuffled sequence and the decoder reconstructs the original order alongside masked spans."
+                 style="width:100%; max-width:560px; display:block; border-radius:4px; border:1px solid var(--rule);" />
+            <figcaption style="font-size:.78rem; color:var(--faint); margin-top:.4rem; max-width:560px; line-height:1.5;">
+              DEPTH's pre-training pipeline. A document is tokenized and corrupted in two ways: sentences
+              are shuffled (with sentence-boundary tokens preserving identity) and some spans are masked.
+              The encoder processes the corrupted sequence; the decoder jointly reconstructs masked spans
+              and recovers the correct sentence order—teaching discourse structure from unlabeled text.
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- REPOSITORIES -->
+  <section id="repositories">
+    <h2 class="section-label">Repositories</h2>
+    <div class="repo-list">
+      <div class="repo-item">
+        <p class="repo-name"><a href="https://github.com/zbambergerNLP/state-of-thoughts" target="_blank" rel="noopener">STATe-of-Thoughts</a></p>
+        <p class="repo-desc">
+          Inference-time compute with open-source LLMs: discrete textual interventions, structured action spaces,
+          and tree search (DSPy and vLLM). Companion code for the STATe-of-Thoughts paper.
+        </p>
+        <p class="repo-url"><a href="https://github.com/zbambergerNLP/state-of-thoughts" target="_blank" rel="noopener">github.com/zbambergerNLP/state-of-thoughts</a></p>
+      </div>
+      <div class="repo-item">
+        <p class="repo-name"><a href="https://github.com/zbambergerNLP/strategic-debate-tot" target="_blank" rel="noopener">Strategic Debate</a></p>
+        <p class="repo-desc">
+          DSPy-based Tree-of-Thoughts for persuasive argument generation and evaluation, with beam search and Monte Carlo tree search.
+        </p>
+        <p class="repo-url"><a href="https://github.com/zbambergerNLP/strategic-debate-tot" target="_blank" rel="noopener">github.com/zbambergerNLP/strategic-debate-tot</a></p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- NEWS -->
+  <section id="news">
+    <h2 class="section-label">News</h2>
+    <ul class="news-list">
+      <li>
+        <span class="news-date">Summer 2026</span>
+        <span>Visiting student researcher at Princeton through VSRC, hosted by <a href="https://bstewart.scholar.princeton.edu/" target="_blank" rel="noopener" style="color:var(--accent)">Brandon Stewart</a>.</span>
+      </li>
+      <li>
+        <span class="news-date">2025</span>
+        <span>Applied Scientist Intern at Amazon Sponsored Products (Seattle): prompt engineering for agentic recommender systems.</span>
+      </li>
+    </ul>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <h2 class="section-label">Contact</h2>
+    <div class="contact-block">
+      <span>📧 <a href="mailto:zachary@campus.technion.ac.il">zachary@campus.technion.ac.il</a></span>
+      <span>💻 <a href="https://github.com/zbambergerNLP" target="_blank" rel="noopener">github.com/zbambergerNLP</a></span>
+      <span style="margin-top:.35rem;">📦 <a href="https://github.com/zbambergerNLP/state-of-thoughts" target="_blank" rel="noopener">state-of-thoughts</a>
+        &nbsp;·&nbsp; <a href="https://github.com/zbambergerNLP/strategic-debate-tot" target="_blank" rel="noopener">strategic-debate-tot</a></span>
+      <span style="color:var(--faint); font-size:.85rem; margin-top:.4rem;">
+        Faculty of Data and Decision Sciences<br>
+        Technion – Israel Institute of Technology<br>
+        Haifa, Israel
+      </span>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  &copy; 2026 Zachary Bamberger
+</footer>
+
+</body>
+</html>
