@@ -20,7 +20,7 @@
       --accent:    #6b4c2a;
       --accent-lt: #f3ece2;
       --tag-bg:    #ede8e0;
-      --max:       860px;
+      --max:       1080px;
     }
 
     html { scroll-behavior: smooth; }
@@ -74,40 +74,44 @@
     .hero {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 5rem 2rem 4rem;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 3.5rem;
-      align-items: start;
+      padding: 6rem 2rem 5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 3rem;
+    }
+    .hero-text {
+      max-width: 600px;
     }
     .hero-name {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      font-size: clamp(2.4rem, 6vw, 3.8rem);
       font-weight: 600;
-      line-height: 1.12;
-      letter-spacing: -.01em;
+      line-height: 1.1;
+      letter-spacing: -.02em;
       color: var(--ink);
     }
     .hero-role {
-      margin-top: .75rem;
-      font-size: 1rem;
+      margin-top: 1rem;
+      font-size: 1.05rem;
       color: var(--muted);
       font-weight: 300;
+      line-height: 1.6;
     }
     .hero-role strong { color: var(--accent); font-weight: 400; }
     .hero-links {
       margin-top: 1.75rem;
       display: flex;
       flex-wrap: wrap;
-      gap: .6rem;
+      gap: .75rem;
     }
     .btn {
       display: inline-flex;
       align-items: center;
       gap: .4rem;
-      padding: .45rem 1rem;
+      padding: .5rem 1.1rem;
       border-radius: 3px;
-      font-size: .82rem;
+      font-size: .85rem;
       letter-spacing: .05em;
       text-transform: uppercase;
       text-decoration: none;
@@ -127,16 +131,16 @@
     }
     .btn-ghost:hover { background: var(--accent-lt); }
     .avatar-wrap {
-      width: 148px;
+      width: 172px;
       flex-shrink: 0;
     }
     .avatar-photo {
-      width: 148px;
-      height: 148px;
+      width: 172px;
+      height: 172px;
       border-radius: 50%;
       border: 3px solid var(--rule);
       overflow: hidden;
-      box-shadow: 0 4px 24px rgba(26,24,20,.12);
+      box-shadow: 0 8px 32px rgba(26,24,20,.08);
     }
     .avatar-photo img {
       width: 100%;
@@ -339,8 +343,8 @@
 
 <!-- HERO -->
 <header class="hero">
-  <div>
-    <h1 class="hero-name">Zachary<br>Bamberger</h1>
+  <div class="hero-text">
+    <h1 class="hero-name">Zachary Bamberger</h1>
     <p class="hero-role">
       PhD Candidate &nbsp;·&nbsp; <strong>Technion – Israel Institute of Technology</strong><br>
       Faculty of Data and Decision Sciences
@@ -353,7 +357,7 @@
   </div>
   <div class="avatar-wrap">
     <div class="avatar-photo">
-      <img src="seattle_hiking.jpg" alt="Zachary Bamberger" width="148" height="148" />
+      <img src="seattle_hiking.jpg" alt="Zachary Bamberger" width="172" height="172" />
     </div>
   </div>
 </header>
@@ -460,8 +464,8 @@
           <figure style="margin-top:1.2rem;">
             <img src="figure1_state.png"
                  alt="STATe-of-Thoughts overview: define action templates, generate outputs, evaluate and study associations"
-                 style="width:100%; max-width:680px; display:block; border-radius:4px; border:1px solid var(--rule); image-rendering:-webkit-optimize-contrast;" />
-            <figcaption style="font-size:.78rem; color:var(--faint); margin-top:.4rem; max-width:600px; line-height:1.5;">
+                 style="width:100%; max-width:860px; display:block; border-radius:4px; border:1px solid var(--rule); image-rendering:-webkit-optimize-contrast;" />
+            <figcaption style="font-size:.78rem; color:var(--faint); margin-top:.4rem; max-width:860px; line-height:1.5;">
               STATe's three-stage loop: (1) define structured action templates from output features of interest,
               (2) generate outputs by having a controller select templates at each reasoning step,
               (3) evaluate outputs and study associations between action choices and quality to steer future generation.
